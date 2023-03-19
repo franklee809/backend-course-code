@@ -6,7 +6,10 @@ connect();
 async function connect() {
 
     try {
-        const amqpServer = "amqp://localhost:5672"
+        // https://armadillo.rmq.cloudamqp.com/
+
+        const amqpServer = "amqps://mnvpqqyn:pwQo4dykvf3uKh1JZzkHUdXlwZBlUw7_@armadillo.rmq.cloudamqp.com/mnvpqqyn"
+        // const amqpServer = "amqp://localhost:5672"
         const connection = await amqp.connect(amqpServer)
         const channel = await connection.createChannel();
         await channel.assertQueue("jobs");
