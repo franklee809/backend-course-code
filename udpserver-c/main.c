@@ -1,5 +1,3 @@
-//https://github.com/nikhilroxtomar/UDP-Client-Server-Program-in-C
-
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
@@ -24,8 +22,18 @@ int main(int argc, char **argv){
   myaddr.sin_addr.s_addr = inet_addr("127.0.0.1");
 
   bind(sockfd, (struct sockaddr*)&myaddr, sizeof(myaddr));
-  addr_size = sizeof(remoteAddr);
-  recvfrom(sockfd, buffer, 1024, 0, (struct sockaddr*)& remoteAddr, &addr_size);
-  printf("got data from %s ", buffer);
+
+  while (1) {
+    addr_size = sizeof(remoteAddr);
+    recvfrom(sockfd, buffer, 1024, 0, (struct sockaddr*)&remoteAddr, &addr_size);
+    printf("Got data from %s\n", buffer);
+
+    // Check for a condition to exit the loop, e.g. receiving a specific message
+    if (strcmp(buffer, "exit") == 0) {
+      printf("Exiting...\n");
+      break;
+    }
+  }
+
   return 0;
 }
