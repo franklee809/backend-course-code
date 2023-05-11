@@ -7,4 +7,3 @@ socket.on("message", (msg, info) => {
     console.log(`My Server got a datagram ${msg}, from: ${info.address}:${info.port}`)
 
 })
-
